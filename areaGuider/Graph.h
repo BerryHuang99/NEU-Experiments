@@ -9,7 +9,8 @@
 
 #ifndef GRAPH_H
 #define GRAPH_H
-#define MAX 100
+#include<string>
+using namespace std;
 
 // the edge of the graph
 class Edge {
@@ -54,12 +55,12 @@ template<class Type>
 class Graph {
 
     private:
-        Head<Type> heads[MAX];
+        Head* heads;
 
     public:
-        Graph();
+        Graph(string fileName);
         ~Graph();
-        void add();
+        void add(Type name, Type nextName, int weight);
         void remove();
 };
 

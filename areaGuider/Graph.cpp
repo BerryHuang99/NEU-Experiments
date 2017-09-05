@@ -8,6 +8,7 @@
 */
 
 #include<iostream>
+#include<fstream>
 #include "Graph.h"
 using namespace std;
 
@@ -68,4 +69,26 @@ Edge* Head::getNext() {
     return firstEdge;
 }
 
+Graph::Graph(string fileName) {
+    ifstream fin;
+    fin.open(fileName, ios::in);
+}
 
+Graph::~Graph() {
+    delete[] heads;
+}
+
+void Graph::add(Type name, Type nextName, int weight) {
+    int i = 0;
+    bool flag = false;
+
+    for(i = 0;  i < MAX; i++) {
+        if (heads[i] == name) {
+            flag = true;
+        }
+    }
+
+    if (flag) {
+
+    }
+}
