@@ -10,6 +10,7 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 #include<string>
+#include<vector>
 using namespace std;
 
 // the edge of the graph
@@ -26,9 +27,9 @@ class Edge {
         void setWeight(int weight);
         void setDest(int dest);
         void setNext(Edge* next);
-        int getWeight();
-        int getDest();
-        Edge* getNext();
+        int getWeight() const;
+        int getDest() const;
+        Edge* getNext() const;
 
 };
 
@@ -45,8 +46,8 @@ class Head {
         ~Head();
         void setHead(Type type);
         void setNext(Edge* next);
-        Type getHead();
-        Edge* getNext();
+        Type getHead() const;
+        Edge* getNext() const;
 
 };
 
@@ -55,7 +56,8 @@ template<class Type>
 class Graph {
 
     private:
-        Head* heads;
+        vector<Head<Type>> heads;
+        typename vector<Head<Type>>::iterator t;
 
     public:
         Graph(string fileName);

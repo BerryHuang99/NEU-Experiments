@@ -33,62 +33,105 @@ void Edge::setNext(Edge* next) {
     this->next = next;
 }
 
-int Edge::getWeight() {
+int Edge::getWeight() const {
     return weight;
 }
 
-int Edge::getDest() {
+int Edge::getDest() const {
     return dest;
 }
 
-Edge* Edge::getNext() {
+Edge* Edge::getNext() const {
     return next;
 }
 
-Head::Head(Type type){
-    this->type = type
-}
-
-Head::~Head() {
-    delete firstEdge;
-}
-
-void Head::setHead(Type type) {
+template<class Type>
+Head<Type>::Head(Type type) {
     this->type = type;
 }
 
-void Head::setNext(Edge* next){
+template<class Type>
+Head<Type>::~Head() {
+    delete firstEdge;
+}
+
+template<class Type>
+void Head<Type>::setHead(Type type) {
+    this->type = type;
+}
+
+template<class Type>
+void Head<Type>::setNext(Edge* next){
     firstEdge = next;
 }
 
-Type Head::getHead() {
+template<class Type>
+Type Head<Type>::getHead() const {
     return type;
 }
 
-Edge* Head::getNext() {
+template<class Type>
+Edge* Head<Type>::getNext() const {
     return firstEdge;
 }
 
-Graph::Graph(string fileName) {
+template<class Type>
+Graph<Type>::Graph(string fileName) {
     ifstream fin;
     fin.open(fileName, ios::in);
 }
 
-Graph::~Graph() {
+template<class Type>
+Graph<Type>::~Graph() {
     delete[] heads;
 }
 
-void Graph::add(Type name, Type nextName, int weight) {
+template<class Type>
+void Graph<Type>::add(Type name, Type nextName, int weight) {
     int i = 0;
     bool flag = false;
+    Head<Type> head;
 
-    for(i = 0;  i < MAX; i++) {
-        if (heads[i] == name) {
-            flag = true;
+    if (heads.empty()) {
+        heads.push_back(new Head<Type>(name));
+    } else {
+        for (t = heads.begin(); t != heads.end(); t++) {
+            if (*t.getHead() == name) {
+                flag = true;
+                head = *t;
+                break;
+            }
+        }
+        if (!flag) {
+            head = new Head<Type>(name);
+            heads.push_back(head);
+        }
+
+        flag = false;
+        for (t = heads.begin(); t != heads.end(); t++) {
+            i++;
+            if (*t.getHead() == nextName) {
+                flag = true;
+                break;
+            }
+        } 
+        if (!flag) {
+            i++;
+            heads.push_back(new Head<Type>(name));
+        }
+
+        Edge* edge = new Edge(i, weight);
+        Edge* p;
+        for (p = head->getNext(); p != NULL; p = p->getNext()) {
+            
         }
     }
+}
 
-    if (flag) {
-
-    }
+int main() {
+    vector<Head<int>> a;
+    cout << a.size();
+    int b;
+    cin >> b;
+    return 0;
 }
