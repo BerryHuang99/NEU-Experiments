@@ -9,6 +9,7 @@
 
 #include<iostream>
 #include<fstream>
+#include<string>
 #include "Graph.h"
 using namespace std;
 
@@ -78,12 +79,23 @@ Edge* Head<Type>::getNext() const {
 template<class Type>
 Graph<Type>::Graph(string fileName) {
     ifstream fin;
+    string str;
+
     fin.open(fileName, ios::in);
+//    locale china("zh_CN.UTF-8");
+    if (!fin.is_open()) {
+        cout << "The file isn't exit." << endl;
+        return;
+    }
+
+    while(getline(fin,str)) {
+        cout << str << endl;
+    }
 }
 
 template<class Type>
 Graph<Type>::~Graph() {
-    delete[] heads;
+ //   delete[] heads;
 }
 
 template<class Type>
@@ -122,16 +134,13 @@ void Graph<Type>::add(Type name, Type nextName, int weight) {
 
         Edge* edge = new Edge(i, weight);
         Edge* p;
-        for (p = head->getNext(); p != NULL; p = p->getNext()) {
-            
-        }
+        for (p = head->getNext(); p->getNext() = NULL; p = p->getNext());
+        p->setNext(edge);
     }
 }
 
 int main() {
-    vector<Head<int>> a;
-    cout << a.size();
-    int b;
-    cin >> b;
-    return 0;
+    Graph<string>* g = new Graph<string>("route.graph");
+    int a;
+    cin >> a;
 }
