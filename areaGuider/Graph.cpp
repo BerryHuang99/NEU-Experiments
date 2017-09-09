@@ -10,6 +10,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<cstring>
 #include "Graph.h"
 using namespace std;
 
@@ -89,7 +90,8 @@ Graph<Type>::Graph(string fileName) {
     }
 
     while(getline(fin,str)) {
-        cout << str << endl;
+        char* s = str.data();
+        cout << strtok(s, "-") << strtok(NULL , "-");
     }
 }
 
@@ -101,46 +103,60 @@ Graph<Type>::~Graph() {
 template<class Type>
 void Graph<Type>::add(Type name, Type nextName, int weight) {
     int i = 0;
+    int j = 0;
     bool flag = false;
-    Head<Type> head;
+    Head<Type> *head_1;
+    Head<Type> *head_2;
 
     if (heads.empty()) {
-        heads.push_back(new Head<Type>(name));
+        head_1 = new Head<Type>(name);
+        heads.push_back(*head_1);
+        i = 0;
+        head_2 = new Head<Type>(name);
+        heads.push_back(*head_2);
+        j = 1;
     } else {
         for (t = heads.begin(); t != heads.end(); t++) {
+            i++;
             if (*t.getHead() == name) {
                 flag = true;
-                head = *t;
+                head_1 = *t;
                 break;
             }
         }
         if (!flag) {
-            head = new Head<Type>(name);
-            heads.push_back(head);
+            i++;
+            head_1 = new Head<Type>(name);
+            heads.push_back(*head_1);
         }
 
         flag = false;
         for (t = heads.begin(); t != heads.end(); t++) {
-            i++;
+            j++;
             if (*t.getHead() == nextName) {
                 flag = true;
+                head_2 = *t;
                 break;
             }
-        } 
-        if (!flag) {
-            i++;
-            heads.push_back(new Head<Type>(name));
         }
-
-        Edge* edge = new Edge(i, weight);
-        Edge* p;
-        for (p = head->getNext(); p->getNext() = NULL; p = p->getNext());
-        p->setNext(edge);
+        if (!flag) {
+            j++;
+            head_2 = new Head<Type>(name);
+            heads.push_back(*head_2);
+        }
     }
+
+    Edge* edge_1 = new Edge(i, weight);
+    Edge* edge_2 = new Edge(j, weight);
+    Edge* p;
+    for (p = head_1->getNext(); p->getNext() != NULL; p = p->getNext());
+    p->setNext(edge_1);
+    for (p = head_2->getNext(); p->getNext() != NULL; p = p->getNext());
+    p->setNext(edge_2);
 }
 
 int main() {
-    Graph<string>* g = new Graph<string>("route.graph");
+    Graph<string>* g = new Graph<string>("route.txt");
     int a;
     cin >> a;
 }

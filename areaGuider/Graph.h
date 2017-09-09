@@ -19,7 +19,7 @@ class Edge {
     private:
         int weight;
         int dest;
-        Edge* next;
+        Edge *next;
 
     public:
         Edge(int dest, int weight);
@@ -29,7 +29,7 @@ class Edge {
         void setNext(Edge* next);
         int getWeight() const;
         int getDest() const;
-        Edge* getNext() const;
+        Edge *getNext() const;
 
 };
 
@@ -39,7 +39,7 @@ class Head {
 
     private:
         Type type;
-        Edge* firstEdge;
+        Edge *firstEdge;
     
     public:
         Head(Type type);
