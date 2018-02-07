@@ -4,10 +4,10 @@
     - HospitalSystem
 + C++
     - areaGuider
-	-linkSort
-	-sort
-		-bubbleSort
-		-selectSort
+	- linkSort
+	- sort
+		- bubbleSort
+		- selectSort
 + Java
     - ATM
     - lottery
