@@ -1,9 +1,13 @@
-# These are my personal experiments when I was a student in Northeastern University.
+# These are personal experiments from the Software College of Northeastern University.
 ## Classification
 + ANCI C
     - HospitalSystem
 + C++
     - areaGuider
+	-linkSort
+	-sort
+		-bubbleSort
+		-selectSort
 + Java
     - ATM
     - lottery
@@ -11,10 +15,6 @@
     - GourmetCoffee
     - HttpServer
     - processorScheduling
-    - producer-customera
-	-linkSort
-	-sort
-		-bubbleSort
-		-selectSort
+    - producer\-customera
 + Java Web
     - Ayll
